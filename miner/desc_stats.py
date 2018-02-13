@@ -2,11 +2,12 @@
 ## but I want to make the scripts stand-alone for now).
 
 class DescriptiveStats(object):
-    def __init__(self, name, all_values):
+    def __init__(self, name, empty_lines, all_values):
         self.name = name
         self._all_values = all_values
         self.total = sum(all_values)
         self.n_revs = len(all_values)
+	self.code_lines = self.n_revs - empty_lines
 
     def mean(self):
         return self.total / float(self._protected_n())
@@ -16,6 +17,15 @@ class DescriptiveStats(object):
 
     def min_value(self):
         return min(self._all_values)
+
+    def line_sizeComplexity(self):
+        oldsize = 0
+        sizeComplexity = 0
+        for newsize in self._all_values:
+           if oldsize != newsize:
+                sizeComplexity = sizeComplexity + 1
+        return sizeComplexity
+
 
     def sd(self):
         from math import sqrt

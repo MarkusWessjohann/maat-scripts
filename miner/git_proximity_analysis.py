@@ -68,9 +68,9 @@ def parse_changes_per_file_in(git_diff):
 ######################################################################
 
 def as_csv(result):
-    print 'file,revs,total,mean,sd,max'
+    print 'file,revs,total,mean,sd,max,sizeComplexity'
     for p in result:
-    	fields_of_interest = [p.name, p.n_revs + 1, p.total, round(p.mean(),2), round(p.sd(),2), p.max_value()]
+    	fields_of_interest = [p.name, p.n_revs + 1, p.total, round(p.mean(),2), round(p.sd(),2), p.max_value(), p.line_sizeComplexity()]
     	printable = [str(field) for field in fields_of_interest]
     	print ','.join(printable)
 

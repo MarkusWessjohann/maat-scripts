@@ -5,6 +5,7 @@ def _as_rev_range(start, end):
 	return start + '..' + end
 
 def _run_git_cmd(git_arguments):
+        print ",".join(git_arguments)
 	return subprocess.Popen(git_arguments, stdout=subprocess.PIPE).communicate()[0]
 
 def _read_revisions_matching(git_arguments):

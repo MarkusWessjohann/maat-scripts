@@ -19,8 +19,8 @@ def as_stats(revision, complexity_by_line):
 ######################################################################
 
 def as_csv(stats):
-	print 'n,total,mean,sd,max'
-	fields_of_interest = [stats.n_revs, stats.total, round(stats.mean(),2), round(stats.sd(),2), stats.max_value()]
+#	print 'n,total,mean,sd,max,line_sizeComplex'
+	fields_of_interest = [args.file, stats.n_revs, stats.total, round(stats.mean(),2), round(stats.sd(),2), stats.max_value(), stats.line_sizeComplexity()]
 	printable = [str(field) for field in fields_of_interest]
 	print ','.join(printable)
 
@@ -31,7 +31,8 @@ def as_csv(stats):
 def run(args):
 	with open (args.file, "r") as file_to_calc:
 		complexity_by_line = complexity_calculations.calculate_complexity_in(file_to_calc.read())
-		stats = desc_stats.DescriptiveStats(args.file, complexity_by_line)
+		empty_lines = complexity_calculations.empty_lines()
+		stats = desc_stats.DescriptiveStats(args.file, empty_lines, complexity_by_line)
 		as_csv(stats)
 
 if __name__ == "__main__":

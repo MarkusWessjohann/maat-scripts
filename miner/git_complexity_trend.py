@@ -21,9 +21,9 @@ def as_stats(revision, complexity_by_line):
 ######################################################################
 
 def as_csv(result):
-    print 'rev,n,total,mean,sd'
+    print 'rev,n,total,mean,sd,line_sizeComplexity'
     for stats in result:
-    	fields_of_interest = [stats.name, stats.n_revs, stats.total, round(stats.mean(),2), round(stats.sd(),2)]
+    	fields_of_interest = [stats.name, stats.n_revs, stats.total, round(stats.mean(),2), round(stats.sd(),2), stats.line_sizeComplexity()]
     	printable = [str(field) for field in fields_of_interest]
     	print ','.join(printable)
 
