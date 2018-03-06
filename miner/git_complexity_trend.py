@@ -13,8 +13,8 @@ import complexity_calculations
 ## Statistics from complexity
 ######################################################################
 
-def as_stats(revision, complexity_by_line):
-	return desc_stats.DescriptiveStats(revision, complexity_by_line)
+def as_stats(revision, empty_lines, complexity_by_line):
+	return desc_stats.DescriptiveStats(revision, empty_lines, complexity_by_line)
     
 ######################################################################
 ## Output
@@ -38,7 +38,8 @@ def calculate_complexity_over_range(file_name, revision_range):
 	for rev in revs:
 		historic_version = git_interactions.read_version_matching(file_name, rev)
 		complexity_by_line = complexity_calculations.calculate_complexity_in(historic_version)
-		complexity_by_rev.append(as_stats(rev, complexity_by_line))
+                empty_lines = complexity_by_line.pop()
+		complexity_by_rev.append(as_stats(rev, empty_lines, complexity_by_line))
 	return complexity_by_rev
 
 def run(args):

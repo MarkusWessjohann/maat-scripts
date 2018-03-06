@@ -6,7 +6,7 @@ import re
 
 leading_tabs_expr = re.compile(r'^(\t+)')
 leading_spaces_expr = re.compile(r'^( +)')
-empty_line_expr = re.compile(r'^\s*$|^\s*\\\*\s*|^\*\s*$')
+empty_line_expr = re.compile(r'^\s*$|^\s*\\\*\s*$|^\*\s*$')
 empty_lines = 0
 
 def n_log_tabs(line):
@@ -28,10 +28,11 @@ def n_log_spaces(line):
     return 0
 
 def contains_code(line):
+    global empty_lines
     if  empty_line_expr.match(line):
         empty_lines=empty_lines + 1
-        return false
-    return true
+        return None
+    return 1
 
 
 def complexity_of(line):
@@ -40,9 +41,10 @@ def complexity_of(line):
 ######################################################################
 ## Statistics from complexity
 ######################################################################
-def empty_lines():		
-    return empty_lines
 
 def calculate_complexity_in(source):
+    global empty_lines
     empty_lines = 0
-    return [complexity_of(line) for line in source.split("\n") if contains_code(line)]
+    resultSet = [complexity_of(line) for line in source.split("\n") if contains_code(line)]
+    resultSet.append(empty_lines)
+    return resultSet
