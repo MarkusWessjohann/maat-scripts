@@ -7,7 +7,6 @@ class DescriptiveStats(object):
         self._all_values = all_values
         self.total = sum(all_values)
         self.n_revs = len(all_values)
-        self.code_lines = self.n_revs 
         self.emty_lines = 0
 
     def __init__(self, name, empty_lines, all_values):
@@ -27,7 +26,7 @@ class DescriptiveStats(object):
         return min(self._all_values)
 
     def code_lines(self):
-        return (self.n_revs - self.empty_lines)
+        return (self._protected_n() - self.empty_lines)
 
     def line_sizeComplexity(self):
         oldsize = 0
@@ -35,6 +34,7 @@ class DescriptiveStats(object):
         for newsize in self._all_values:
            if oldsize != newsize:
                 sizeComplexity = sizeComplexity + 1
+           oldsize = newsize
         return sizeComplexity
 
 
