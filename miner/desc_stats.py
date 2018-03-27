@@ -7,7 +7,7 @@ class DescriptiveStats(object):
         self._all_values = all_values
         self.total = sum(all_values)
         self.n_revs = len(all_values)
-	self.code_lines = self.n_revs 
+        self.code_lines = self.n_revs 
         self.emty_lines = 0
 
     def __init__(self, name, empty_lines, all_values):
@@ -15,7 +15,7 @@ class DescriptiveStats(object):
         self._all_values = all_values
         self.total = sum(all_values)
         self.n_revs = len(all_values)
-	self.empty_lines = empty_lines
+        self.empty_lines = empty_lines
 
     def mean(self):
         return self.total / float(self._protected_n())
