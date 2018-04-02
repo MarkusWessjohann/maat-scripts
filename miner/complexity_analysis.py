@@ -11,8 +11,8 @@ import complexity_calculations
 ## Statistics from complexity
 ######################################################################
 
-def as_stats(revision, empty_lines, complexity_by_line):
- return desc_stats.DescriptiveStats(revision, empty_lines, complexity_by_line)
+def as_stats(revision, complexity_by_line):
+ return desc_stats.DescriptiveStats(revision, complexity_by_line)
     
 ######################################################################
 ## Output
@@ -31,8 +31,7 @@ def as_csv(stats):
 def run(args):
  with open (args.file, "r") as file_to_calc:
   complexity_by_line = complexity_calculations.calculate_complexity_in(file_to_calc.read())
-  empty_lines = complexity_by_line.pop()
-  stats = desc_stats.DescriptiveStats(args.file, empty_lines, complexity_by_line)
+  stats = desc_stats.DescriptiveStats(args.file, complexity_by_line)
   as_csv(stats)
 
 if __name__ == "__main__":

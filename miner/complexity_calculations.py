@@ -7,7 +7,6 @@ import re
 leading_tabs_expr = re.compile(r'^(\t+)')
 leading_spaces_expr = re.compile(r'^( +)')
 empty_line_expr = re.compile(r'^\s*$|^\s*\\\*\s*$|^\*\s*$')
-empty_lines = 0
 
 def n_log_tabs(line):
     pattern = re.compile(r' +')
@@ -28,12 +27,7 @@ def n_log_spaces(line):
     return 0
 
 def contains_code(line):
-    global empty_lines
-    if  empty_line_expr.match(line):
-        empty_lines=empty_lines + 1
-        return None
-    return 1
-
+    return not empty_line_expr.match(line)
 
 def complexity_of(line):
     return n_log_tabs(line) + (n_log_spaces(line) / 2) # hardcoded indentation
@@ -43,8 +37,4 @@ def complexity_of(line):
 ######################################################################
 
 def calculate_complexity_in(source):
-    global empty_lines
-    empty_lines = 0
-    resultSet = [complexity_of(line) for line in source.split("\n") if contains_code(line)]
-    resultSet.append(empty_lines)
-    return resultSet
+    return [complexity_of(line) for line in source.split("\n") if contains_code(line)]
