@@ -17,7 +17,7 @@ class DescriptiveStats(object):
     def min_value(self):
         return min(self._all_values)
 
-    def line_sizeComplexity(self):
+    def lineIndentComplexity(self):
         oldsize = 0
         sizeComplexity = 0
         for newsize in self._all_values:
